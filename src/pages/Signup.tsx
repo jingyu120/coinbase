@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useCreateUserMutation } from "../api/users.api";
 
 type Props = {};
 
@@ -6,8 +7,11 @@ const Signup = (props: Props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = () => {
-    console.log(name, email, password);
+
+  const [createUser] = useCreateUserMutation();
+
+  const handleSubmit = async () => {
+    await createUser({ name, email, password });
   };
 
   return (
