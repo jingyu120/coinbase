@@ -1,5 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../api/auth.api";
 import { useCreateUserMutation } from "../api/users.api";
+import { useAppDispatch } from "../app/hooks";
+import { User } from "../models/User";
+import { setAuthState } from "../slices/auth.slice";
 
 type Props = {};
 
@@ -9,9 +14,19 @@ const Signup = (props: Props) => {
   const [password, setPassword] = useState("");
 
   const [createUser] = useCreateUserMutation();
+  const [login] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    await createUser({ name, email, password });
+    try {
+      (await createUser({ name, email, password })) as { data: User };
+      const response = (await login({ email, password })) as { data: User };
+      dispatch(setAuthState({ user: response.data }));
+      navigate("/");
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
