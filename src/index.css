@@ -5,3 +5,7 @@
 .inputform {
   @apply border px-3 rounded-md;
 }
+
+.theader {
+  @apply p-3 text-sm font-semibold tracking-wide text-left;
+}
