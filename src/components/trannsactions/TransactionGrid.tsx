@@ -35,17 +35,3 @@ const TransactionGrid = (props: Props) => {
 };
 
 export default TransactionGrid;
-/*
-{data?.data &&
-            data.data.map((transaction: any) => {
-              return (
-                <tr key={transaction.id}>
-                  <td>{transaction}</td>
-                  <td>{transaction.type}</td>
-                  <td>{transaction.amount.amount}</td>
-                  <td>{transaction.native_amount.amount}</td>
-                  <td>{transaction.Status}</td>
-                </tr>
-              );
-            })}
-            */
